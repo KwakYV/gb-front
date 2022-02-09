@@ -16,6 +16,18 @@
 <div class="container">
    <h2 th:text="'Продукт: ' + ${product.title}"></h2>
    <h2 th:text="'Цена: ' + ${product.cost}"></h2>
+   <h2 th:text="'Производитель: ' + ${product.manufacturer}"></h2>
+    <table th:border="1" >
+        <tr>
+            <h2>Список категорий:</h2>
+        </tr>
+        <tr class="ui-icon-bookmark" th:if="${product.categories.isEmpty()}">
+            <td class="text-center" colspan="3">No Records found. Add some...!</td>
+        </tr>
+        <tr class="ui-icon" th:each="category: ${product.categories}" >
+            <td class="align-middle" th:text="'- '+${category.title}"/>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="~{footer :: footerBlock}"></div>

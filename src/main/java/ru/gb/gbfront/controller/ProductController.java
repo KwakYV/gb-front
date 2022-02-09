@@ -4,10 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.gb.api.category.api.CategoryGateway;
+import ru.gb.api.category.dto.CategoryDto;
+import ru.gb.api.manufacturer.api.ManufacturerGateway;
+import ru.gb.api.manufacturer.dto.ManufacturerDto;
 import ru.gb.api.product.api.ProductGateway;
 import ru.gb.api.product.dto.ProductDto;
+import ru.gb.gbfront.service.ProductService;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -15,6 +23,7 @@ import java.time.LocalDate;
 public class ProductController {
 
     private final ProductGateway productGateway;
+    private final ProductService productService;
 
     @GetMapping("/all")
     public String getProductList(Model model) {
@@ -24,22 +33,16 @@ public class ProductController {
 
     @GetMapping
     public String showForm(Model model, @RequestParam(name = "id", required = false) Long id) {
-        ProductDto product;
-        if (id != null) {
-            product = (ProductDto) productGateway.getProduct(id).getBody();
-        } else {
-            product = ProductDto.builder().build();
-        }
-        model.addAttribute("product", product);
-        return "product-form";
+        return productService.prepareProductForm(model, id);
     }
 
     @PostMapping
-    public String saveProduct(ProductDto product) {
-        product.setManufactureDate(LocalDate.now());
-        productGateway.handlePost(product);
+    public String saveProduct(ProductDto product, @RequestParam("category") String category) {
+        productService.handlePost(product, category);
         return "redirect:/product/all";
     }
+
+
 
 //    @GetMapping("/addToCart")
 //    public String addToCart(@RequestParam(name = "id", required = false) Long id){

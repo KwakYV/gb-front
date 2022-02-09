@@ -27,9 +27,40 @@
         </div>
         <div class="mb-3">
             <label for="date-id" class="form-label">Дата изготовления</label>
-            <input type="date" class="form-control" id="date-id" >
+            <input type="date" class="form-control" id="date-id" th:field="*{manufactureDate}">
 <!--            th:field="*{manufactureDate}"-->
         </div>
+        <div class="mb-3">
+            <label for="manufacturer-id" class="form-label">
+                Производитель
+            </label>
+            <select class="form-select" id="manufacturer-id" th:field="*{manufacturer}">
+                <option th:each="manufacturer : ${manufacturers}"
+                    th:value="${manufacturer.name}"
+                    th:text="${manufacturer.name}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label for="category-id" class="form-label">
+                 Категория
+            </label>
+            <input type="text" class="form-control" id="category-id" th:name="category">
+<!--                <select class="form-select" id="category-id" th:name="category">-->
+<!--                    <option th:each="category : ${categories}"-->
+<!--                        th:value="${category.title}"-->
+<!--                        th:text="${category.title}">-->
+<!--                    </option>-->
+
+<!--                </select>-->
+
+
+        </div>
+
         <div class="mb-3">
             <label for="status-id" class="form-label">Наличие товара</label>
             <select class="form-select" aria-label="Default select example" id="status-id" th:field="*{status}">
@@ -38,6 +69,7 @@
                 th:text="${statusValue.title}"></option>
             </select>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
