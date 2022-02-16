@@ -49,7 +49,7 @@
             <label for="category-id" class="form-label">
                  Категория
             </label>
-            <input type="text" class="form-control" id="category-id" th:name="category">
+            <input type="text" class="form-control" id="category-id" th:name="category" th:field="*{categories}">
 <!--                <select class="form-select" id="category-id" th:name="category">-->
 <!--                    <option th:each="category : ${categories}"-->
 <!--                        th:value="${category.title}"-->
