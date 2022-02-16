@@ -25,7 +25,6 @@ public class ProductService {
 
     public String prepareProductForm(Model model, Long id){
         ProductDto product;
-        List<CategoryDto> categories;
         List<ManufacturerDto> manufacturers = manufacturerGateway.getManufacturerList();
         if (id != null) {
             product =  productGateway.getProduct(id).getBody();
@@ -34,6 +33,7 @@ public class ProductService {
         }
         model.addAttribute("product", product);
         model.addAttribute("manufacturers", manufacturers);
+
         return "product-form";
     }
 
