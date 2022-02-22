@@ -26,3 +26,9 @@ spring:
           auth: 'true'
           starttls:
             enable: 'true'
+
+jwt:
+  token:
+    expired: 180000
+    refreshExpired: 9_000_000
+    secret: 'jwtsecret'
