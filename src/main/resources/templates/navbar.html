@@ -31,7 +31,7 @@
 
 
                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <form th:action="@{/logout}" method="post">
+                    <form th:action="@{/logout}" method="get">
                         <input type="submit" class="btn btn-danger" th:value="Выйти">
                     </form>
                 </li>
@@ -39,8 +39,14 @@
 
 
                 <li sec:authorize="isAnonymous()" class="nav-item">
-                    <form th:action="@{/logout}" method="post">
+                    <form th:action="@{/auth}" method="get">
                         <input type="submit" class="btn btn-warning" th:value="Войти">
+                    </form>
+                </li>
+
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <form th:action="@{/user}" method="get">
+                        <input type="submit" class="btn btn-link" th:value="Зарегистрироваться">
                     </form>
                 </li>
 
